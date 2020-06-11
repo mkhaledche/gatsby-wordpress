@@ -245,16 +245,18 @@ exports.createPages = async ({ graphql, actions }) => {
       let parentCat = catObj.nodes.find(
         parent => parent.alternative_id == edge.alternative_parent
       )
-      createPage({
-        path:
-          typeof parentCat != "undefined"
-            ? `/${lang}/category/${parentCat.slug}/${edge.slug}/`
-            : `/${lang}/category/${edge.slug}/`,
-        component: catTemplate,
-        context: {
-          cat_id: edge.alternative_id,
-        },
-      })
+      if (edge.alternative_id != null) {
+        createPage({
+          path:
+            typeof parentCat != "undefined"
+              ? `/${lang}/category/${parentCat.slug}/${edge.slug}/`
+              : `/${lang}/category/${edge.slug}/`,
+          component: catTemplate,
+          context: {
+            cat_id: edge.alternative_id,
+          },
+        })
+      }
     })
   }
   createCatIndices(allCAten, "en", "english-category")

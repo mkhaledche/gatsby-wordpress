@@ -17,6 +17,7 @@ const CategoryIndex = props => {
     homeString = "jesus-es-musulman"
   }
   const cat = cats.find(category => category.node.alternative_id == catID)
+
   let parentCat = cats.find(
     parent => cat.node.alternative_parent == parent.node.alternative_id
   )
@@ -31,7 +32,7 @@ const CategoryIndex = props => {
       page.node.categories.indexOf(catID) > -1 ||
       childCatIds.indexOf(page.node.categories[0]) > -1
   )
-  console.log(catPages)
+
   const catPosts = posts.filter(
     post =>
       post.node.categories.indexOf(catID) > -1 ||
