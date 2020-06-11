@@ -1,22 +1,26 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
-  const post = data.wordpressPage
-  const siteTitle = data.site.siteMetadata.title
-  const { previous, next } = pageContext
+const BlogPostLayout = props => {
+  const { post, siteTitle, location } = props
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO
-        title={post.title}
-        description={post.content}
-      />
+      <SEO title={post.title.rendered} description={post.content.rendered} />
+      <Link style={{ boxShadow: `none` }} to="en">
+        EN
+      </Link>{" "}
+      <Link style={{ boxShadow: `none` }} to="fr">
+        FR
+      </Link>{" "}
+      <Link style={{ boxShadow: `none` }} to="es">
+        ES
+      </Link>
       <article>
         <header>
           <h1
@@ -25,7 +29,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: 0,
             }}
           >
-            {post.title}
+            {post.title.rendered}
           </h1>
           <p
             style={{
@@ -34,10 +38,10 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.date}
+            {/* {post.date} */}
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.content }} />
+        <section dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -47,7 +51,6 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           <Bio />
         </footer>
       </article>
-
       <nav>
         <ul
           style={{
@@ -78,20 +81,4 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   )
 }
 
-export default BlogPostTemplate
-
-export const pageQuery = graphql`
-  query($id: String!) {
-    wordpressPage(id: { eq: $id }) {
-      title
-      content
-    }
-    site {
-      id
-      siteMetadata {
-        title
-        description
-      }
-    }
-  }
-`
+export default BlogPostLayout

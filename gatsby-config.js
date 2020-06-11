@@ -1,7 +1,16 @@
+// const postType = {
+//   id: 1,
+//   name: "String",
+//   slug: "String",
+//   object: { a: 1, b: "2", c: false },
+//   array: [{ a: 1, b: "2", c: false }],
+// }
+
 module.exports = {
+  pathPrefix: `/gatsby/public`,
   siteMetadata: {
     title: `Jesus is Muslim`,
-    description: `Discover <Islam></Islam>.`,
+    description: `Discover Islam.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
       twitter: `kylemathews`,
@@ -35,39 +44,166 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-wordpress",
+      resolve: "gatsby-source-apiserver",
       options: {
-        baseUrl: "jesus-is-muslim.net",
-        protocol: "https",
-        restApiRoutePrefix: "wp-json",
-        hostingWPCOM: false,
-        useACF: false,
-        // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
-        // It can help you debug specific API Endpoints problems.
-        verboseOutput: true,
-        // Set how many pages are retrieved per API request.
-        perPage: 5,
-        // Set how many simultaneous requests are sent at once.
-        concurrentRequests: 10,
-        includedRoutes: [
-          "**/categories",
-          "**/posts",
-          "**/pages",
-          "**/media",
-          "**/search",
-          "**/tags",
-          "**/taxonomies",
-          "**/users",
-        ],
-        // Set this to keep media sizes.
-        // This option is particularly useful in case you need access to
-        // URLs for thumbnails, or any other media detail.
-        // Defaults to false
-        keepMediaSizes: false,
+        // Type prefix of entities from server
+        typePrefix: "po__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/wp-json/wp/v2/posts?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `sten`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "page__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/wp-json/wp/v2/pages?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `en`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "c__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/wp-json/wp/v2/categories?per_page=20`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `aten`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "po__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/fr/wp-json/wp/v2/posts?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `stfr`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "page__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/fr/wp-json/wp/v2/pages?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `fr`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "c__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/fr/wp-json/wp/v2/categories?per_page=20`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `atfr`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "po__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/es/wp-json/wp/v2/posts?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `stes`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "page__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/es/wp-json/wp/v2/pages?per_page=100`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `es`,
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "c__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `http://jesus-is-muslim.net/es/wp-json/wp/v2/categories?per_page=20`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        name: `ates`,
+      },
+    },
   ],
 }
